@@ -1,24 +1,58 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+import {
+  PageNotFound,
+  Password,
+  Profile,
+  Recovery,
+  Register,
+  Reset,
+  Username,
+} from "./components";
+
+// to use tailwind css, here okkkk!!!!!
+// https://tailwindcss.com/docs/guides/create-react-app
+
+// auth middleware ..
+import { AuthorizeUser, IsUser } from "./middleware/auth";
+
+const router = createBrowserRouter([
+  { path: "/", element: <Username></Username> },
+  { path: "/register", element: <Register></Register> },
+  {
+    path: "/password",
+    element: (
+      <IsUser>
+        <Password></Password>,
+      </IsUser>
+    ),
+  },
+  {
+    path: "/profile",
+    element: (
+      <AuthorizeUser>
+        <Profile></Profile>
+      </AuthorizeUser>
+    ),
+  },
+  {
+    path: "/recovery",
+    element: (
+      <IsUser>
+        <Recovery></Recovery>
+      </IsUser>
+    ),
+  },
+  { path: "/reset", element: <Reset></Reset> },
+  { path: "*", element: <PageNotFound></PageNotFound> },
+]);
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      <RouterProvider router={router}></RouterProvider>
+    </main>
   );
 }
 
