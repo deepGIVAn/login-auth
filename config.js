@@ -3,7 +3,7 @@ module.exports = {
   ATLAS_URL:
     "mongodb+srv://givan:givan@login-otp.asslffd.mongodb.net/login-otp?retryWrites=true&w=majority",
   EMAIL_API_KEY:
-    "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",
+    "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",
 };
 
 // works in git only..
